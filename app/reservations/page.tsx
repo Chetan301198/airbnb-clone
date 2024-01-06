@@ -10,10 +10,6 @@ const ResevationsPage = () => {
   const { user, reservations, setReservations, loading, setLoading } =
     useGlobalContext();
 
-  if (!user) {
-    return <EmptyState title="Unauthorized" subtitle="Please login" />;
-  }
-
   useEffect(() => {
     setLoading(true);
     axios
@@ -21,6 +17,10 @@ const ResevationsPage = () => {
       .then((res: any) => setReservations(res.data))
       .finally(() => setLoading(false));
   }, []);
+
+  if (!user) {
+    return <EmptyState title="Unauthorized" subtitle="Please login" />;
+  }
 
   if (loading) {
     return <Loading />;

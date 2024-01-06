@@ -10,10 +10,6 @@ const PropertyPage = () => {
   const { listings, user, setListings, loading, setLoading } =
     useGlobalContext();
 
-  if (!user) {
-    return <EmptyState title="Unauthorized" subtitle="Please login" />;
-  }
-
   useEffect(() => {
     setLoading(true);
     axios
@@ -21,6 +17,10 @@ const PropertyPage = () => {
       .then((res: any) => setListings(res.data))
       .finally(() => setLoading(false));
   }, []);
+
+  if (!user) {
+    return <EmptyState title="Unauthorized" subtitle="Please login" />;
+  }
 
   if (loading) {
     return <Loading />;

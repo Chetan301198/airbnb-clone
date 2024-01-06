@@ -10,10 +10,6 @@ const TripsPage = () => {
   const { user, reservations, setReservations, loading, setLoading } =
     useGlobalContext();
 
-  if (!user) {
-    return <EmptyState title="Unauthorized" subtitle="Please login" />;
-  }
-
   useEffect(() => {
     setLoading(true);
     axios
@@ -22,13 +18,15 @@ const TripsPage = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  if (!user) {
+    return <EmptyState title="Unauthorized" subtitle="Please login" />;
+  }
+
   if (loading) {
     return <Loading />;
   }
 
   const userRes = reservations.filter((res) => res.userId === user._id);
-
-  console.log(userRes, reservations);
 
   if (userRes?.length === 0) {
     return (

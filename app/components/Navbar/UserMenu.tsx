@@ -27,14 +27,16 @@ const UserMenu: React.FC = () => {
   const MenuItem = ({
     onClick,
     label,
+    customClass,
   }: {
     onClick: () => void;
     label: string;
+    customClass?: string;
   }) => {
     return (
       <div
         onClick={onClick}
-        className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+        className={`px-4 py-3 hover:bg-neutral-100 transition font-semibold ${customClass}`}
       >
         {label}
       </div>
@@ -54,9 +56,9 @@ const UserMenu: React.FC = () => {
       <div className="flex flex-row items-center gap-3">
         <div
           onClick={onRent}
-          className="hidden md:block rounded-full text-sm font-semibold py-3 px-4 cursor-pointer hover:bg-neutral-100 transition"
+          className="hidden lg:block rounded-full text-sm font-semibold py-3 px-4 cursor-pointer hover:bg-neutral-100 transition"
         >
-          Airbnb your home
+          Add your place
         </div>
         <div
           onClick={toggle}
@@ -79,7 +81,7 @@ const UserMenu: React.FC = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden top-12 right-0 text-sm">
+        <div className="absolute rounded-xl shadow-md w-[40vw] md:w-[20vw] lg:w-3/4 bg-white overflow-hidden top-12 right-0 text-sm">
           <div className="flex flex-col cursor-pointer">
             {data?.user ? (
               <>
@@ -112,7 +114,8 @@ const UserMenu: React.FC = () => {
                   }}
                 />
                 <MenuItem
-                  label="Airbnb my home"
+                  customClass="block lg:hidden"
+                  label="Add my place"
                   onClick={() => {
                     setIsOpen(false);
                     rentModal.onOpen();

@@ -46,17 +46,37 @@ const HomeClient = ({ searchParams }: HomeProps) => {
 
   return (
     <Container>
-      <div className="pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
+      <div className="pt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
         {listings.length > 0 &&
           listings
             .filter((list) => {
               if (category) {
                 return list.category === category;
               }
+              return list;
+            })
+            .filter((list) => {
               if (roomCount) {
-                return list.roomCount >= roomCount;
+                return list.roomCount === roomCount;
               }
-
+              return list;
+            })
+            .filter((list) => {
+              if (guestCount) {
+                return list.guestCount === guestCount;
+              }
+              return list;
+            })
+            .filter((list) => {
+              if (location) {
+                return list.location === location;
+              }
+              return list;
+            })
+            .filter((list) => {
+              if (bathroomCount) {
+                return list.bathroomCount === bathroomCount;
+              }
               return list;
             })
             .map((listing: any) => {

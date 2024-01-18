@@ -4,7 +4,7 @@ import { MdOutlineConnectingAirports } from "react-icons/md";
 
 const Logo = () => {
   return (
-    <Link href={"/"} className="text-rose-500">
+    <Link href={"/"} className="text-primary">
       {/* <Image
         src={"/images/logo.png"}
         priority

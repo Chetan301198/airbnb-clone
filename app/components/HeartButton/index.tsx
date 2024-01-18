@@ -17,7 +17,7 @@ const HeartButton: React.FC<HeartButtonProps> = ({ listingId, user }) => {
       className="relative hover:opacity-80 transition cursor-pointer"
     >
       {hasFavorited ? (
-        <AiFillHeart size={30} className="fill-rose-500" />
+        <AiFillHeart size={30} className="fill-primary" />
       ) : (
         <AiOutlineHeart size={30} className="fill-white" />
       )}

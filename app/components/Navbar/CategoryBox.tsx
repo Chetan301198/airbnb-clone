@@ -49,9 +49,9 @@ const CategoryBox: React.FC<CategotyProps> = ({
   return (
     <div
       onClick={handleClick}
-      className={`flex flex-col items-center justify-center gap-2 p-3 border-b-2 hover:text-rose-500 transition cursor-pointer ${
+      className={`flex flex-col items-center justify-center gap-2 p-3 border-b-2 hover:text-primary transition cursor-pointer ${
         selected
-          ? "text-rose-500 border-b-rose-500"
+          ? "text-primary border-b-primary"
           : "border-transparent text-neutral-500"
       }`}
     >

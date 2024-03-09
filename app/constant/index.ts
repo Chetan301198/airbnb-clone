@@ -23,6 +23,7 @@ export interface Listing {
   price: number;
   user?: User;
   reservations?: Reservation[];
+  currency: string;
 }
 
 export interface Reservation {

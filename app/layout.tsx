@@ -9,6 +9,7 @@ import RentModal from "@/app/components/Modal/RentModal";
 import SearchModal from "@/app/components/Modal/SearchModal";
 import AuthProvider from "./components/AuthProvider";
 import { GlobalContextProvider } from "./context";
+import Loading from "./components/Loading";
 
 const inter = Nunito({ subsets: ["latin"] });
 
@@ -22,6 +23,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  if (typeof window !== "undefined") {
+    if (document.readyState !== "complete") {
+      return <Loading />;
+    }
+  }
+
   return (
     <html lang="en">
       <body className={inter.className}>

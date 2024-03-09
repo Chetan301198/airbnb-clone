@@ -1,6 +1,6 @@
 "use client";
+import { getCurrencyDetails } from "@/app/hooks/useCurrencies";
 import { UseFormRegister, FieldValues, FieldErrors } from "react-hook-form";
-import { BiDollar } from "react-icons/bi";
 
 interface InputProps {
   id: string;
@@ -26,10 +26,9 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className="w-full relative">
       {formatPrice && (
-        <BiDollar
-          size={24}
-          className="text-neutral-500 absolute top-5 left-2"
-        />
+        <p className="text-neutral-500 font-semibold text-3xl absolute top-3 left-3">
+          {getCurrencyDetails({})?.symbol}
+        </p>
       )}
       <input
         id={id}

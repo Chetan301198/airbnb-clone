@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import ListingReservation from "@/app/components/ListingReservation";
 import { Range } from "react-date-range";
 import { useGlobalContext } from "@/app/context";
+import { getCurrencyDetails } from "@/app/hooks/useCurrencies";
 
 const initDateRange = {
   startDate: new Date(),
@@ -51,8 +52,13 @@ const ListingClient: React.FC<ListingClientPage> = ({
     return dates;
   }, [reservations]);
 
+  const details = getCurrencyDetails({
+    fromCurrency: listing.currency || "USD",
+    price: listing.price,
+  });
+
   const [isLoading, setIsLoading] = useState(false);
-  const [totalPrice, setTotalPrice] = useState(listing.price);
+  const [totalPrice, setTotalPrice] = useState(details?.value);
   const [dateRange, setDateRange] = useState<Range>(initDateRange);
 
   const onCreateListing = useCallback(() => {
@@ -96,12 +102,12 @@ const ListingClient: React.FC<ListingClientPage> = ({
       );
 
       if (dayCount && listing.price) {
-        setTotalPrice(dayCount * listing.price);
+        setTotalPrice(dayCount * (details?.value || 1));
       } else {
-        setTotalPrice(listing.price);
+        setTotalPrice(details?.value);
       }
     }
-  }, [dateRange, listing.price]);
+  }, [dateRange, details?.value]);
 
   const category = useMemo(() => {
     return categories.find((c) => c.label === listing.category);
@@ -129,13 +135,14 @@ const ListingClient: React.FC<ListingClientPage> = ({
             />
             <div className="order-first mb-10 md:order-last md:col-span-3">
               <ListingReservation
-                price={listing.price}
-                totalPrice={totalPrice}
+                price={details?.value || 1}
+                totalPrice={totalPrice || 1}
                 onChangeDate={(value) => setDateRange(value)}
                 dateRange={dateRange}
                 onSubmit={onCreateListing}
                 disabledDates={disabledDates}
                 disabled={isLoading}
+                symbol={details?.symbol}
               />
             </div>
           </div>

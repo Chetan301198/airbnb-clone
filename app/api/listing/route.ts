@@ -25,6 +25,10 @@ export async function POST(req: Request) {
     description,
   } = body;
 
+  const userInfo = await fetch("https://ipapi.co/json");
+
+  const res = await userInfo.json();
+
   const listingData = await listing.create({
     guestCount,
     category,
@@ -35,6 +39,7 @@ export async function POST(req: Request) {
     price,
     title,
     description,
+    currency: res.currency,
   });
 
   return NextResponse.json({

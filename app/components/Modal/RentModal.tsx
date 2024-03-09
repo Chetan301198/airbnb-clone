@@ -28,7 +28,7 @@ enum STEPS {
 const RentModal = () => {
   const router = useRouter();
   const rentModal = useRentModal();
-  const [step, setStep] = useState(STEPS.CATEGORY);
+  const [step, setStep] = useState(STEPS.PRICE);
   const [isLoading, setIsLoading] = useState(false);
 
   const { user, setListings } = useGlobalContext();

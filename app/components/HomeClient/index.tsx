@@ -6,7 +6,7 @@ import { IListingParams } from "../../constant";
 import { useGlobalContext } from "@/app/context";
 import { useEffect } from "react";
 import axios from "axios";
-import Loading from "../Loading";
+import SkeletonLoading from "../SkeletonLoading";
 
 interface HomeProps {
   searchParams: IListingParams;
@@ -23,8 +23,6 @@ const HomeClient = ({ searchParams }: HomeProps) => {
     location,
   } = searchParams;
 
-  console.log(searchParams);
-
   const { user, listings, setListings, loading, setLoading } =
     useGlobalContext();
 
@@ -37,7 +35,11 @@ const HomeClient = ({ searchParams }: HomeProps) => {
   }, []);
 
   if (loading) {
-    return <Loading />;
+    return (
+      <Container>
+        <SkeletonLoading />
+      </Container>
+    );
   }
 
   if (listings.length === 0) {

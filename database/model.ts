@@ -19,6 +19,7 @@ const listingSchema = new Schema({
   description: String,
   imageSrc: String,
   category: String,
+  currency: String,
   roomCount: Number,
   bathroomCount: Number,
   guestCount: Number,

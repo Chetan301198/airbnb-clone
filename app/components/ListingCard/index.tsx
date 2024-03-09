@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
+import { getCurrencyDetails } from "@/app/hooks/useCurrencies";
 
 interface ListingCardProps {
   data: Listing;
@@ -52,6 +53,13 @@ const ListingCard: React.FC<ListingCardProps> = ({
     return data.price;
   }, [reservation, data.price]);
 
+  const currencyDetail = getCurrencyDetails({
+    fromCurrency: data?.currency || "USD",
+    price: Number(price),
+  });
+
+  console.log(currencyDetail);
+
   const reservationDate = useMemo(() => {
     if (!reservation) {
       return null;
@@ -87,7 +95,10 @@ const ListingCard: React.FC<ListingCardProps> = ({
           {reservationDate || data.category}
         </div>
         <div className="flex flex-row items-center gap-1 px-2">
-          <div className="font-semibold">${price}</div>
+          <div className="font-semibold">
+            {currencyDetail?.symbol}
+            {currencyDetail?.value}
+          </div>
           {!reservation && <div className="font-light">/ Night</div>}
         </div>
         {onAction && actionLabel && (
